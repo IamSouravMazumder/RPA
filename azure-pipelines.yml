@@ -1,0 +1,17 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+stages:
+ - stage: Build
+   displayName: Create build artifact
+   jobs:
+     - job: BuildArtifact
+       pool: MYLAPTOP
+       steps:
+         - script: C:\Users\Sushmita\AppData\Local\UiPath\UiPath.Agent.exe pack $(Build.SourcesDirectory)\project.json -o $(Build.ArtifactStagingDirectory)\ -v 1.0.$(Build.BuildNumber)
+           displayName: "Build the artifact"
+         - publish: $(Build.ArtifactStagingDirectory)
+            artifact: drop
+  
